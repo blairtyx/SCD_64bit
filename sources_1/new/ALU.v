@@ -1,3 +1,10 @@
+//////////////////////////////////////////////////////////////////////////////////
+// Design Name: Single Cycle Datapath 64bit
+// Module Name: ALU
+// tyx
+//////////////////////////////////////////////////////////////////////////////////
+
+
 module ALU (input_a, input_b, ALUop, result, Z);
     parameter BITSIZE = 64;
     input [BITSIZE-1:0] input_a;
@@ -6,10 +13,7 @@ module ALU (input_a, input_b, ALUop, result, Z);
     output reg [BITSIZE-1:0] result;
     output Z;
     
-
     always @(input_a, input_b, ALUop) begin
-        // initialize zero flag
-
         case(ALUop)
             // AND
             4'h1: result <= input_a & input_b;
@@ -21,10 +25,9 @@ module ALU (input_a, input_b, ALUop, result, Z);
             4'h4: result <= input_a + input_b;
             // subtraction
             4'h5: result <= input_a - input_b;
-            // self defined operation
+            // self defined operation, xzr
             4'h6: result <= 0;
         endcase
-        
     end
     assign Z = (result == 0)? (1'b1):(1'b0);
 endmodule

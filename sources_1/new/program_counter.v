@@ -1,22 +1,11 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 11/03/2020 03:47:13 AM
-// Design Name: 
+// Design Name: Single Cycle Datapath 64bit
 // Module Name: program_counter
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
+// tyx
+
+// version: 1.1
+// Update: Syncronous Reset
 //////////////////////////////////////////////////////////////////////////////////
 
 
@@ -27,26 +16,38 @@ module program_counter(clk, rst, pc_branch, pc_1, pc_0);
     output reg [63:0] pc_0 = 0; // pc of the previous time slot
     output reg [63:0] pc_1; // pc increment by one
 
-    // Async reset
-    always @(posedge rst)// reset to initial pc, pc = 0
-    begin
-        pc_0 <= 0;
-        pc_1 <= 1;
-    end
-    
-    // 
+    // clock trigger, pause if rst == 1
     always @(posedge clk)
     begin
-        if (pc_branch != pc_1)
+        // Sync Reset
+        if (rst)
         begin
-             pc_0 = pc_branch;
+            pc_0 <= 0;
+            pc_1 <= 0;// special input, only occur when rst is 1
         end
-        else if (pc_branch == pc_1)
+    
+        // Normal case
+        else
         begin
-            pc_0 = pc_0 +1;    
+            // unconditional branch case, pc_branch doesn't match pc_1
+            if (pc_branch != pc_1) 
+            begin
+                 pc_0 = pc_branch;
+            end
+            
+            // normal case, pc is incremented by one
+            else if (pc_branch == pc_1 && pc_1 != 0)
+            begin
+                pc_0 = pc_0 +1;    
+            end
+            // one cycle after the reset
+            else if (pc_branch == pc_1 && pc_1 ==0 )
+            begin
+                pc_0 = 0;
+            end
+            
+            // indicating the next instruction for next cycle
+            pc_1 = pc_0 +1;
         end
-        
-        pc_1 = pc_0 +1;
     end
-
 endmodule

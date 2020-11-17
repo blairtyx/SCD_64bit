@@ -1,24 +1,14 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 11/16/2020 05:10:58 PM
-// Design Name: 
-// Module Name: SignExtend
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
+// Design Name: Single Cycle Datapath 64bit
+// Module Name: Control Logic
+// Discription:
+//      2 cases:
+//          1. signExtend == 0, used in B-type instruction, read from Instru[20:0]
+//          2. signExtend == 1, used in D-type instruction, read from Instru[20:10], 
+//      Both case would sign extend regarding to the MSB of selected bit segment.(Instru[20]) 
+// tyx
 //////////////////////////////////////////////////////////////////////////////////
-
 
 module SignExtend(
     input [31:0] instru,
@@ -29,11 +19,8 @@ module SignExtend(
     always @(instru, signExtend)
         begin
             case (signExtend)
-                  0: se_pc = {{43{instru[20]}},instru[20:0]}; // read from Instr[20:0], D-format instruction
-                  1: se_pc = {{53{instru[20]}},instru[20:10]};// read from Instr[20:10], B-format instruction    
+                  0: se_pc = {{43{instru[20]}},instru[20:0]}; // read from Instr[20:0], B-format instruction
+                  1: se_pc = {{53{instru[20]}},instru[20:10]};// read from Instr[20:10], D-format instruction    
             endcase
-        
         end
-    
-    
 endmodule

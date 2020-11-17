@@ -1,3 +1,10 @@
+//////////////////////////////////////////////////////////////////////////////////
+// Design Name: Single Cycle Datapath 64bit
+// Module Name: Register File
+// tyx
+//////////////////////////////////////////////////////////////////////////////////
+
+
 module Register_File(ReadSelect1, ReadSelect2, WriteSelect, WriteData, WriteEnable, ReadData1, ReadData2, clk, rst);
 
     parameter BITSIZE = 64;
@@ -43,5 +50,4 @@ module Register_File(ReadSelect1, ReadSelect2, WriteSelect, WriteData, WriteEnab
                     reg_file[WriteSelect] <= WriteData; //If writeback is enabled and not xzr register.
             end
         end
-
 endmodule

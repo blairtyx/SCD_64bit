@@ -1,3 +1,13 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Design Name: Single Cycle Datapath 64bit
+// Module Name: Control Logic
+// Discription:
+//      Generate Control bits to MUX and other unit.
+// tyx
+//////////////////////////////////////////////////////////////////////////////////
+
+
 module Control_logic (Opcode, RegtoLoc, RegWrite, 
                     ALUSrc, ALUOp, Branch, 
                     MemWrite, MemRead, MemtoReg, SignExtend);
@@ -12,7 +22,7 @@ module Control_logic (Opcode, RegtoLoc, RegWrite,
     output reg MemtoReg;
     output reg SignExtend;
 
-
+    // Opcode triggering
     always @(Opcode)
     begin
         case(Opcode)

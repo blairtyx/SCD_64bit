@@ -1,4 +1,11 @@
 `timescale 1ns / 1ns
+//////////////////////////////////////////////////////////////////////////////////
+// Design Name: Single Cycle Datapath 64bit
+// Module Name: Instruction Memory
+// tyx
+//////////////////////////////////////////////////////////////////////////////////
+
+
 module Instruction_Memory(Address, ReadData1);
 
 	parameter BITSIZE = 32;
@@ -32,10 +39,7 @@ module Instruction_Memory(Address, ReadData1);
     
     LDUR 11'h7A2 = 11'b111_1010_0010
     
-    
-    
-    
-    
+
     Example code:
     
     // ADD test
@@ -81,35 +85,30 @@ module Instruction_Memory(Address, ReadData1);
                          |opcode       | DT address | Rn  | Rt   
     LDUR x11,[x0,#13] 32'b111_1010_0010_00000_001101_00000_01011; // load content in [x0 + 13] to x11
     LDUR x12,[x1,#0]  32'b111_1010_0010_00000_000000_00001_01100; // load content in [x1 + 0 ] to x12
-    
-    
     */
-    
-    
-    
-    
     
     initial 
     begin
         // ADD test
-        memory_file[0] = 32'b010_0101_1000_00011_000000_00001_00100; // ADD x4, x1, x3
-        memory_file[1] = 32'b010_0101_1000_00100_000000_00001_00101; // ADD x5, x1, x4
+        memory_file[0] = 32'b010_0101_1000_00011_000000_00001_00100; // ADD x4, x1, x3 check x4
+        memory_file[1] = 32'b010_0101_1000_00100_000000_00001_00101; // ADD x5, x1, x4 check x5
+        
         // AND test
-        memory_file[2] = 32'b100_0011_0000_00011_000000_00001_00110; // AND x6, x1, x3
-        memory_file[3] = 32'b100_0011_0000_00011_000000_00001_10010; // ADD x5, x1, x4
+        memory_file[2] = 32'b100_0011_0000_00011_000000_00001_00110; // AND x6, x1, x3 check x6
+        memory_file[3] = 32'b100_0011_0000_00011_000000_00001_10010; // AND x5, x1, x4 check x5
+        
         // ORR test
-        memory_file[4] = 32'b101_1001_0000_00011_000000_00001_00111; // ORR x7, x1, x3 
-        memory_file[5] = 32'b101_1001_0000_00111_000000_00101_01000; // ORR x8, x5, x7
+        memory_file[4] = 32'b101_1001_0000_00011_000000_00001_00111; // ORR x7, x1, x3 check x7
+        memory_file[5] = 32'b101_1001_0000_00111_000000_00101_01000; // ORR x8, x5, x7 check x8
+        
         // SUB test
-        memory_file[6] = 32'b001_0010_0100_00111_000000_01000_01001; // SUB x9, x8, x7
-        memory_file[7] = 32'b001_0010_0100_01000_000000_00111_01010; // SUB x10, x7,x8
+        memory_file[6] = 32'b001_0010_0100_00111_000000_01000_01001; // SUB x9, x8, x7 check x9
+        memory_file[7] = 32'b001_0010_0100_01000_000000_00111_01010; // SUB x10, x7,x8 check x10
+        
         // Branch test
         // memory_file[8] = 32'b000_1011_0000_11111_111111_11111_11000; // Branch to start, backward branch
         memory_file[8] = 32'b000_1011_0000_00000_000000_00000_00100; // Branch to IMem[12]
-        
-        
         memory_file[10] = 32'b000_1011_0000_00000_000000_00000_01000; // Branch to IMem[18]
-        
         memory_file[12] = 32'b000_1011_0000_11111_111111_11111_11110; // Branch to IMem[10]
         
         // STUR test
