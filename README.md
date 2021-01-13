@@ -15,22 +15,22 @@ temp:
 		
 Design File:
 [SCD_main] - <main.v>
-		- [Datapath]{u_DP} 							- <Datapath.v>					
-        - [ALU]{u_ALU}							- <ALU.v>
-        - [branch_unit]{u_bu} 			- <branch_unit.v>
-        - [Control_logic]{u_cl} 		- <Control_logic.v>
-        - [MUX_5bit]{u_RegtoLoc} 		- <MUX_5bit.v>
-				- [MUX_64bit]{u_ALUSrc} 		- <MUX_64bit.v>
-				- [MUX_64bit]{u_MemtoReg} 	- <MUX_64bit.v>
-				- [program_counter]{u_pc} 	- <program_counter.v>
-				- [SignExtend]{u_se} 				- <SignExtend.v>
-		- [Instruction_Memory]{u_IM} 		- <IMem.v>
-		- [Register_File]{u_RF} 				- <Register_File.v>
-		- [DataMemory]{u_DM} 						- <DataMemory.v>
+	- [Datapath]{u_DP} 				- <Datapath.v>					
+        	- [ALU]{u_ALU}				- <ALU.v>
+        	- [branch_unit]{u_bu} 			- <branch_unit.v>
+        	- [Control_logic]{u_cl} 		- <Control_logic.v>
+       		- [MUX_5bit]{u_RegtoLoc} 		- <MUX_5bit.v>
+		- [MUX_64bit]{u_ALUSrc} 		- <MUX_64bit.v>
+		- [MUX_64bit]{u_MemtoReg} 		- <MUX_64bit.v>
+		- [program_counter]{u_pc} 		- <program_counter.v>
+		- [SignExtend]{u_se} 			- <SignExtend.v>
+	- [Instruction_Memory]{u_IM} 			- <IMem.v>
+	- [Register_File]{u_RF} 			- <Register_File.v>
+	- [DataMemory]{u_DM} 				- <DataMemory.v>
 		
 Simulation File:
-[Datapath_tb] 											- <Datapath_tb.v>
-		- [SCD_main]{u_main} 						- <main.v>
+[Datapath_tb] 						- <Datapath_tb.v>
+	- [SCD_main]{u_main} 				- <main.v>
 ```
 
 
